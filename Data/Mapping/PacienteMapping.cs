@@ -23,15 +23,14 @@ namespace Data.Mapping
                    .HasColumnType("date") 
                    .HasDefaultValueSql("GETDATE()"); // Data de Nascimento obrigatoria, definindo no banco como date retornando a data atual.
 
-            builder.HasIndex(x => x.CPF).IsUnique(); // CPF é unico
+            builder.HasIndex(x => x.CPF)
+                .IsUnique(); // Define o índice único para o CPF
 
             builder.HasIndex(x => x.RG).IsUnique(); // RG é unico
 
             builder.Property(x => x.UF_RG).IsRequired().HasMaxLength(15); ; // UF do RG obrigatório
 
             builder.Property(x => x.Email).HasMaxLength(100); // Email é opcional e pode conter até 100 caracteres
-
-            builder.Property(x => x.Celular).IsRequired().HasMaxLength(15); // Celular obrigatório e pode conter no máximo 15 caracteres
 
             builder.Property(x => x.TelefoneFixo).HasMaxLength(15); // Telefone fixo é opcional e pode conter até 15 caracteres
 
