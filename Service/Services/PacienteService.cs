@@ -1,5 +1,4 @@
-﻿using API_Teste_Ténico.DTOs.PacienteDTO;
-using AutoMapper;
+﻿using AutoMapper;
 using Domain.DTOs.PacienteDTO;
 using Domain.Interfaces.IRepository;
 using Domain.Interfaces.IService;
@@ -55,15 +54,6 @@ namespace Service.Services
 
             await _pacienteRepository.Update(pacienteDb);
             return true;
-        }
-
-        public async Task ExcluirPaciente(int id)
-        {
-            var paciente = await _pacienteRepository.GetById(id);
-            if (paciente != null)
-            {
-               await _pacienteRepository.Delete(paciente);
-            }
         }
     }
 }

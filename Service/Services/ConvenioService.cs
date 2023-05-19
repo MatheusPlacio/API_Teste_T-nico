@@ -39,14 +39,5 @@ namespace Service.Services
             await _convenioRepository.Update(convenioDb);
             return true;
         }
-
-        public async Task ExcluirConvenio(int id)
-        {
-            var convenio = await _convenioRepository.GetById(id);
-            if (convenio != null)
-            {
-              await _convenioRepository.Delete(convenio);
-            }
-        }
     }
 }

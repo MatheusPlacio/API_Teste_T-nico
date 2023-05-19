@@ -9,6 +9,5 @@ namespace Domain.Interfaces.IService
         Task CriarConvenio(Convenio convenio);
         Task<Convenio?> ObterConvenioPorId(int id);
         Task<bool> AtualizarConvenio(ConvenioUpdateDTO convenio);
-        Task ExcluirConvenio(int id);
     }
 }
