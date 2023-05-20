@@ -14,6 +14,7 @@ builder.Services.AddDbContext<MyContext>(options =>
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddDependencyInjectionConfiguration();
+builder.Services.AddCors();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {

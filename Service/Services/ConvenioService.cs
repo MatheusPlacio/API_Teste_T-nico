@@ -1,4 +1,5 @@
 ﻿using API_Teste_Ténico.DTOs.ConvenioDTO;
+using AutoMapper;
 using Domain.Interfaces.IRepository;
 using Domain.Interfaces.IService;
 using Domain.Models;
@@ -8,9 +9,11 @@ namespace Service.Services
     public class ConvenioService : IConvenioService
     {
         private readonly IConvenioRepository _convenioRepository;
-        public ConvenioService(IConvenioRepository convenioRepository)
+        private readonly IMapper _mapper;
+        public ConvenioService(IConvenioRepository convenioRepository, IMapper mapper)
         {
             _convenioRepository = convenioRepository;
+            _mapper = mapper;
         }
 
         public async Task<IList<Convenio>> BuscarConvenios()
@@ -28,16 +31,19 @@ namespace Service.Services
             return await _convenioRepository.GetById(id);
         }
 
-        public async Task<bool> AtualizarConvenio(ConvenioUpdateDTO convenio)
+        public async Task<bool> AtualizarConvenio(ConvenioUpdateDTO convenioDTO)
         {
-            var convenioDb = await _convenioRepository.GetById(convenio.ConvenioId);
+            if (convenioDTO == null) { return false; }
+
+            var convenioDb = await _convenioRepository.GetById(convenioDTO.ConvenioId);
 
             if (convenioDb == null) { return false; }
-            
-            convenioDb.Update(convenio.Nome, convenio.Descricao);
+
+            _mapper.Map(convenioDTO, convenioDb);
 
             await _convenioRepository.Update(convenioDb);
             return true;
         }
+
     }
 }

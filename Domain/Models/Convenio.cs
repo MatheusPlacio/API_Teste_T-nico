@@ -9,12 +9,5 @@
 
         // EF Relacionamento
         public List<Paciente> Pacientes { get; set; }
-
-
-        public void Update(string nome, string descricao)
-        {
-            Nome = nome;
-            Descricao = descricao;
-        }
     }
 }
