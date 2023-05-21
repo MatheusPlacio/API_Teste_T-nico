@@ -1,0 +1,22 @@
+PASSO A PASSO EXECUTAR A API.
+
+1- O projet está usando entity framework Core versão 6, entity framework core, automapper ultima versão
+entity framework core design e tools versão 6, e entity framework core SQL server.
+
+
+vá até o arquivo appsettings.json da API, altere a string de conexão para
+a sua máquina local ao lado de 'Server' onde está escrito 'SUAMAQUINA'.
+
+\/ \/ \/ \/
+
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=SUAMAQUINA;Database=Teste_Tecnico;Trusted_Connection=True;"
+  }
+
+/\ /\ /\ /\
+
+2- Vá em ferramentas (tools) no visual studio, gerenciador de pacote nucGet (nuGet Package Manager), 
+abra o console e digita o comando add-migration New, e logo após de criar as migrations digite o comando
+update-database. Depois de criado as migrations e ter feito a conexão de com o seu banco de dados local, 
+já consegue testar a api.
+
