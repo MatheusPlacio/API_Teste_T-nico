@@ -17,5 +17,6 @@ a sua máquina local ao lado de 'Server' onde está escrito 'SUAMAQUINA'.
 
 1- Vá em ferramentas (tools) no visual studio, gerenciador de pacote nucGet (nuGet Package Manager), 
 2- abra o console
+3- no projeto padrão (default projetct) SELECIONE o projeto 'DATA 
 3- Depois digite o comando add-migration New, 
 4- E logo após de criar as migrations digite o comando update-database.
