@@ -1,5 +1,4 @@
-﻿using API_Teste_Ténico.DTOs.ConvenioDTO;
-using API_Teste_Ténico.DTOs.PacienteDTO;
+﻿using API_Teste_Ténico.DTOs.PacienteDTO;
 using AutoMapper;
 using Domain.DTOs.PacienteDTO;
 using Domain.Models;
@@ -10,8 +9,6 @@ namespace API_Teste_Ténico.Configuration
     {
         public AutoMapperConfig() 
         {
-            CreateMap<Convenio, ConvenioRegisterDTO>().ReverseMap();
-            CreateMap<Convenio, ConvenioUpdateDTO>().ReverseMap();
             CreateMap<Paciente, PacienteRegisterDTO>().ReverseMap();
             CreateMap<Paciente, PacienteUpdateDTO>().ReverseMap();
         }   

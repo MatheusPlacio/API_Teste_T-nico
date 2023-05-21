@@ -1,5 +1,5 @@
-﻿using API_Teste_Ténico.DTOs.ConvenioDTO;
-using AutoMapper;
+﻿using AutoMapper;
+using Domain.DTOs.ConvenioDTO;
 using Domain.Interfaces.IRepository;
 using Domain.Interfaces.IService;
 using Domain.Models;
@@ -9,40 +9,34 @@ namespace Service.Services
     public class ConvenioService : IConvenioService
     {
         private readonly IConvenioRepository _convenioRepository;
-        private readonly IMapper _mapper;
-        public ConvenioService(IConvenioRepository convenioRepository, IMapper mapper)
+        public ConvenioService(IConvenioRepository convenioRepository)
         {
             _convenioRepository = convenioRepository;
-            _mapper = mapper;
         }
 
-        public async Task<IList<Convenio>> BuscarConvenios()
+        public async Task<IList<ConvenioDTO>> BuscarConvenios()
         {
-           return await _convenioRepository.Get();
+            var convenios = await _convenioRepository.Get();
+
+            var conveniosDTO = convenios.Select(c => new ConvenioDTO
+            {
+                ConvenioId = c.ConvenioId,
+                Nome = c.Nome,
+                Descricao = c.Descricao
+            }).ToList();
+
+            return conveniosDTO;
         }
 
-        public async Task CriarConvenio(Convenio convenio)
+        public async Task CriarConvenio(ConvenioDTO convenio)
         {
-            await _convenioRepository.Add(convenio);
-        }
+            var convenioEntity = new Convenio
+            {
+                Nome = convenio.Nome,
+                Descricao = convenio.Descricao
+            };
 
-        public async Task<Convenio?> ObterConvenioPorId(int id)
-        {
-            return await _convenioRepository.GetById(id);
-        }
-
-        public async Task<bool> AtualizarConvenio(ConvenioUpdateDTO convenioDTO)
-        {
-            if (convenioDTO == null) { return false; }
-
-            var convenioDb = await _convenioRepository.GetById(convenioDTO.ConvenioId);
-
-            if (convenioDb == null) { return false; }
-
-            _mapper.Map(convenioDTO, convenioDb);
-
-            await _convenioRepository.Update(convenioDb);
-            return true;
+            await _convenioRepository.Add(convenioEntity);
         }
 
     }

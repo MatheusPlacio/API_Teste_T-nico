@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Domain.Models
+namespace Domain.DTOs.ConvenioDTO
 {
-    public class Convenio
+    public class ConvenioDTO
     {
         public int ConvenioId { get; set; }
 
@@ -15,10 +15,5 @@ namespace Domain.Models
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         [StringLength(150, ErrorMessage = "O campo {0} deve ter no máximo {1} caracteres")]
         public string Descricao { get; set; }
-
-
-        // EF Relacionamento
-        public List<Paciente> Pacientes { get; set; }
     }
 }
-

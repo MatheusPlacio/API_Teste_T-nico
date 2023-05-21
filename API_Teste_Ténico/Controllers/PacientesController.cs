@@ -3,6 +3,7 @@ using AutoMapper;
 using Domain.DTOs.PacienteDTO;
 using Domain.Interfaces.IService;
 using Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_Teste_Ténico.Controllers

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class CPF : Migration
+    public partial class Migrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,12 +33,12 @@ namespace Data.Migrations
                     SobreNome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     DataDeNascimento = table.Column<DateTime>(type: "date", nullable: false, defaultValueSql: "GETDATE()"),
                     Genero = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    CPF = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RG = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CPF = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    RG = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
                     UF_RG = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Celular = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    TelefoneFixo = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    Celular = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
+                    TelefoneFixo = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     CarteirinhaDoConvenio = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     ValidadeDaCarteirinha = table.Column<string>(type: "nvarchar(7)", maxLength: 7, nullable: false),
                     ConvenioId = table.Column<int>(type: "int", nullable: false)

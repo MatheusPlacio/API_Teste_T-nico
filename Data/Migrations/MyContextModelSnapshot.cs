@@ -55,7 +55,8 @@ namespace Data.Migrations
 
                     b.Property<string>("CPF")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
 
                     b.Property<string>("CarteirinhaDoConvenio")
                         .IsRequired()
@@ -64,8 +65,8 @@ namespace Data.Migrations
 
                     b.Property<string>("Celular")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(14)
+                        .HasColumnType("nvarchar(14)");
 
                     b.Property<int>("ConvenioId")
                         .HasColumnType("int");
@@ -76,6 +77,7 @@ namespace Data.Migrations
                         .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -91,7 +93,8 @@ namespace Data.Migrations
 
                     b.Property<string>("RG")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(14)
+                        .HasColumnType("nvarchar(14)");
 
                     b.Property<string>("SobreNome")
                         .IsRequired()
@@ -99,6 +102,7 @@ namespace Data.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("TelefoneFixo")
+                        .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 

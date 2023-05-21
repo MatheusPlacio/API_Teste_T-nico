@@ -1,5 +1,5 @@
-﻿using API_Teste_Ténico.DTOs.ConvenioDTO;
-using AutoMapper;
+﻿using AutoMapper;
+using Domain.DTOs.ConvenioDTO;
 using Domain.Interfaces.IService;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -26,34 +26,13 @@ namespace API_Teste_Ténico.Controllers
             return Ok(convenios);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> ObterConvenioPorId(int id)
-        {
-            var convenios = await _convenioService.ObterConvenioPorId(id);
-            if (convenios == null)
-            {
-                return NotFound();
-            }
-            return Ok(convenios);
-        }
-
         [HttpPost]
-        public async Task<ActionResult<ConvenioRegisterDTO>> CriarConvenio(ConvenioRegisterDTO convenioDTO)
+        public async Task<IActionResult> CriarConvenio(ConvenioDTO convenio)
         {
-            await _convenioService.CriarConvenio(_mapper.Map<Convenio>(convenioDTO));
-            return Ok(convenioDTO);
+            await _convenioService.CriarConvenio(convenio);
+            return Ok(convenio);
         }
 
-        [HttpPut]
-        public async Task<ActionResult<ConvenioUpdateDTO>> AtualizarConvenio(ConvenioUpdateDTO convenioDTO)
-        {
-            var result = await _convenioService.AtualizarConvenio(convenioDTO);
-            if (!result)
-            {
-                return BadRequest("Convênio não encontrado");
-            }
-            return Ok(convenioDTO);
-        }
     }
 }
 

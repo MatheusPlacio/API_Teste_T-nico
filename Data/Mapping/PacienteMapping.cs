@@ -21,7 +21,7 @@ namespace Data.Mapping
             builder.Property(x => x.DataDeNascimento)
                    .IsRequired() 
                    .HasColumnType("date") 
-                   .HasDefaultValueSql("GETDATE()"); // Data de Nascimento obrigatoria, definindo no banco como date retornando a data atual.
+                   .HasDefaultValueSql("GETDATE()"); // Data de Nascimento obrigatoria, definindo no banco como date retornando a data.
 
             builder.HasIndex(x => x.CPF)
                 .IsUnique(); // Define o índice único para o CPF

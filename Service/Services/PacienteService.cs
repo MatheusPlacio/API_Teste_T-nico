@@ -17,10 +17,30 @@ namespace Service.Services
             _mapper = mapper;
         }
 
-        public async Task<IList<Paciente>> ObterTodosPacientes()
+        public async Task<IList<PacienteDTO>> ObterTodosPacientes()
         {
-            return await _pacienteRepository.Get();
+            var pacientes = await _pacienteRepository.GetPacientes();
+            var pacientesDTO = pacientes.Select(p => new PacienteDTO
+            {
+                PacienteId = p.PacienteId,
+                Nome = p.Nome,
+                SobreNome = p.SobreNome,
+                DataDeNascimento = p.DataDeNascimento,
+                Genero = p.Genero,
+                CPF = p.CPF,
+                RG = p.RG,
+                UF_RG = p.UF_RG,
+                Email = p.Email,
+                Celular = p.Celular,
+                TelefoneFixo = p.TelefoneFixo,
+                CarteirinhaDoConvenio = p.CarteirinhaDoConvenio,
+                ValidadeDaCarteirinha = p.ValidadeDaCarteirinha,
+                NomeConvenio = p.Convenio.Nome 
+            }).ToList();
+
+            return pacientesDTO;
         }
+
 
         public async Task CriarPaciente(Paciente paciente)
         {
@@ -39,11 +59,11 @@ namespace Service.Services
 
         public async Task<bool> AtualizarPaciente(PacienteUpdateDTO pacienteDTO)
         {
-            var existingPaciente = await _pacienteRepository.Buscar(c => c.CPF == pacienteDTO.CPF && c.PacienteId != pacienteDTO.PacienteId);
+            var existingPaciente = await _pacienteRepository.Buscar(c => (c.CPF == pacienteDTO.CPF || c.RG == pacienteDTO.RG) && c.PacienteId != pacienteDTO.PacienteId);
 
             if (existingPaciente.Any())
             {
-                throw new Exception("CPF já pertence a outro usuário");
+                throw new Exception("Documento já pertence a outro usuário");
             }
 
             var pacienteDb = await _pacienteRepository.GetById(pacienteDTO.PacienteId);

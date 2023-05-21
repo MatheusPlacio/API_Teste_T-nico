@@ -6,7 +6,7 @@ namespace Domain.Interfaces.IService
 {
     public interface IPacienteService
     {
-        Task<IList<Paciente>> ObterTodosPacientes();
+        Task<IList<PacienteDTO>> ObterTodosPacientes();
         Task CriarPaciente(Paciente paciente);
         Task<Paciente?> ObterPacientePorId(int id);
         Task<bool> AtualizarPaciente(PacienteUpdateDTO pacienteDTO);
