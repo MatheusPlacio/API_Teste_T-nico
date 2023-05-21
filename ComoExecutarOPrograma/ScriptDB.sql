@@ -83,5 +83,3 @@ VALUES ('Carlos', 'Ferreira', '1982-09-15', 'Masculino', '56789012345', '5678901
 
 INSERT INTO Pacientes (Nome, SobreNome, DataDeNascimento, Genero, CPF, RG, UF_RG, Celular, TelefoneFixo, Email, CarteirinhaDoConvenio, ValidadeDaCarteirinha, ConvenioId)
 VALUES ('Ana', 'Lima', '1995-12-20', 'Feminino', '32165498709', '321654987', 'RS', '333333333', '222222222', 'ana@example.com', 'JKL012', '06/2023', 2);
-
-
