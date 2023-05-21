@@ -1,0 +1,2 @@
+Essa API foi desenvolvida para cadastrar e visualizar um convênio, e também
+cadastrar, visualizar e editar um paciente.
