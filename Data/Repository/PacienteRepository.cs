@@ -15,7 +15,8 @@ namespace Data.Repository
 
         public async Task<IList<Paciente>> GetPacientes()
         {
-            return await _context.Pacientes.Include(x => x.Convenio).ToListAsync();
+            var resultado = await _context.Pacientes.Include(x => x.Convenio).ToListAsync();
+            return resultado;
         }
     }
 }

@@ -10,5 +10,6 @@ namespace Domain.Interfaces.IService
         Task CriarPaciente(Paciente paciente);
         Task<Paciente?> ObterPacientePorId(int id);
         Task<bool> AtualizarPaciente(PacienteUpdateDTO pacienteDTO);
+        Task<bool> DeletarPaciente(int id);
     }
 }

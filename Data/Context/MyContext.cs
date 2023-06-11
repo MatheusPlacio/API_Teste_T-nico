@@ -8,6 +8,8 @@ namespace Data.Context
     {
         public DbSet<Paciente> Pacientes { get; set; }
         public DbSet<Convenio> Convenios { get; set; }
+        public DbSet<Endereco> Enderecos { get; set; }
+        public DbSet<Funcionario> Funcionarios { get; set; }
 
         public MyContext(DbContextOptions<MyContext> options) : base(options)
         { }
@@ -18,6 +20,8 @@ namespace Data.Context
 
             modelBuilder.ApplyConfiguration(new PacienteMapping());
             modelBuilder.ApplyConfiguration(new ConvenioMapping());
+            modelBuilder.ApplyConfiguration(new EnderecoMapping());
+            modelBuilder.ApplyConfiguration(new FuncionarioMapping());
         }
     }
 }

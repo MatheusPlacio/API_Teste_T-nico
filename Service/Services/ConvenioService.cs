@@ -28,6 +28,17 @@ namespace Service.Services
             return conveniosDTO;
         }
 
+        public async Task<Convenio?> ObterConvenioPorId(int id)
+        {
+            var resultado = await _convenioRepository.GetById(id);
+
+            if (resultado == null)
+                throw new Exception("Convênio não encontrado");
+
+            return resultado;
+        }
+
+
         public async Task CriarConvenio(ConvenioDTO convenio)
         {
             var convenioEntity = new Convenio
@@ -39,5 +50,14 @@ namespace Service.Services
             await _convenioRepository.Add(convenioEntity);
         }
 
+        public async Task<bool> DeleterConvenio(int id)
+        {
+            var resultado = await _convenioRepository.GetById(id);
+            if (resultado == null)
+                return false;
+
+            await _convenioRepository.Delete(resultado);
+            return true;
+        }
     }
 }

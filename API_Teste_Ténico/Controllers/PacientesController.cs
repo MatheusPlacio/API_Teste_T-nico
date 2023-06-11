@@ -56,5 +56,16 @@ namespace API_Teste_Ténico.Controllers
             }
             return Ok(pacienteDTO);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletarPaciente(int id)
+        {
+            var result = await _pacienteService.DeletarPaciente(id);
+            if (!result)
+            {
+                return BadRequest("Paciente não encontrado");
+            }
+            return Ok("Paciente excluído com sucesso");
+        }
     }
 }

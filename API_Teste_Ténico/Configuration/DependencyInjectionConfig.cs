@@ -14,9 +14,13 @@ namespace API_Teste_Ténico.Configuration
             services.AddScoped<IRepository<Convenio>, ConvenioRepository>();
             services.AddScoped<IConvenioRepository, ConvenioRepository>();
             services.AddScoped<IPacienteRepository, PacienteRepository>();
+            services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+            services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
 
             services.AddScoped<IPacienteService, PacienteService>();
             services.AddScoped<IConvenioService, ConvenioService>();
+            services.AddScoped<IEnderecoService, EnderecoService>();
+            services.AddScoped<IFuncionarioService, FuncionarioService>();
         }
     }
 }

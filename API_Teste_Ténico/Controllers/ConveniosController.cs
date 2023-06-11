@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Domain.DTOs.ConvenioDTO;
 using Domain.Interfaces.IService;
-using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_Teste_Ténico.Controllers
@@ -26,6 +25,14 @@ namespace API_Teste_Ténico.Controllers
             return Ok(convenios);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> ObterConvenioPorId(int id)
+        {
+            var convenio = await _convenioService.ObterConvenioPorId(id);
+
+            return Ok(convenio);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CriarConvenio(ConvenioDTO convenio)
         {
@@ -33,6 +40,16 @@ namespace API_Teste_Ténico.Controllers
             return Ok(convenio);
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> DeletarConvenio(int id)
+        {
+            var result = await _convenioService.DeleterConvenio(id);
+            if (!result)
+            {
+                return BadRequest("Convênio não encontrado");
+            }
+            return Ok("Convênio exlcuido com sucesso");
+        }
     }
 }
 
