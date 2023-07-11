@@ -26,7 +26,7 @@ namespace API_Teste_Ténico.Controllers
         [HttpGet]
         public async Task<IActionResult> ObterTodosEnderecos()
         {
-            var enderecos = await _enderecoService.ObterTodosEnderecos();
+            var enderecos = await _enderecoService.GetTodosEnderecos();
             return Ok(enderecos);
         }
 
@@ -42,9 +42,9 @@ namespace API_Teste_Ténico.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AdicionarEndereco(EnderecoDTO endereco)
+        public async Task<IActionResult> AdicionarEndereco(EnderecoCepDTO cep)
         {
-             await _enderecoService.AdicionarEndereco(endereco);
+             await _enderecoService.AdicionarEndereco(cep);
             return Ok();
         }
 

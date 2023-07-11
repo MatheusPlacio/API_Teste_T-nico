@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20230521213859_Migrations")]
-    partial class Migrations
+    [Migration("20230709014252_alterandoNomelocalidade")]
+    partial class alterandoNomelocalidade
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,6 +45,84 @@ namespace Data.Migrations
                     b.HasKey("ConvenioId");
 
                     b.ToTable("Convenios");
+                });
+
+            modelBuilder.Entity("Domain.Models.Endereco", b =>
+                {
+                    b.Property<int>("EnderecoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EnderecoId"), 1L, 1);
+
+                    b.Property<string>("Bairro")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Cep")
+                        .IsRequired()
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
+
+                    b.Property<string>("Complemento")
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<int>("FuncionarioId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Logradouro")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<int>("Numero")
+                        .HasMaxLength(50)
+                        .HasColumnType("int");
+
+                    b.Property<string>("UF")
+                        .IsRequired()
+                        .HasMaxLength(2)
+                        .HasColumnType("nvarchar(2)");
+
+                    b.Property<string>("localidade")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.HasKey("EnderecoId");
+
+                    b.HasIndex("FuncionarioId");
+
+                    b.ToTable("Enderecos");
+                });
+
+            modelBuilder.Entity("Domain.Models.Funcionario", b =>
+                {
+                    b.Property<int>("FuncionarioId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FuncionarioId"), 1L, 1);
+
+                    b.Property<int>("Idade")
+                        .HasMaxLength(2)
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("SobreNome")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("FuncionarioId");
+
+                    b.ToTable("Funcionarios");
                 });
 
             modelBuilder.Entity("Domain.Models.Paciente", b =>
@@ -131,6 +209,17 @@ namespace Data.Migrations
                     b.ToTable("Pacientes");
                 });
 
+            modelBuilder.Entity("Domain.Models.Endereco", b =>
+                {
+                    b.HasOne("Domain.Models.Funcionario", "Funcionario")
+                        .WithMany("Endereco")
+                        .HasForeignKey("FuncionarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Funcionario");
+                });
+
             modelBuilder.Entity("Domain.Models.Paciente", b =>
                 {
                     b.HasOne("Domain.Models.Convenio", "Convenio")
@@ -145,6 +234,11 @@ namespace Data.Migrations
             modelBuilder.Entity("Domain.Models.Convenio", b =>
                 {
                     b.Navigation("Pacientes");
+                });
+
+            modelBuilder.Entity("Domain.Models.Funcionario", b =>
+                {
+                    b.Navigation("Endereco");
                 });
 #pragma warning restore 612, 618
         }

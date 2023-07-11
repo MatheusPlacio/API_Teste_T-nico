@@ -23,7 +23,7 @@ namespace API_Teste_Ténico.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ObterTodosEnderecos()
+        public async Task<IActionResult> ObterTodosFuncionarios()
         {
             var funcionario = await _funcionarioService.ObterTodosFuncionarios();
             return Ok(funcionario);
@@ -35,13 +35,13 @@ namespace API_Teste_Ténico.Controllers
             var funcionario = await _funcionarioService.ObterFuncionarioPorId(id);
             if (funcionario == null)
             {
-                return NotFound();
+                return NotFound("Funcionário não encontrado");
             }
             return Ok(funcionario);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AdicionarEndereco(FuncionarioDTO funcionario)
+        public async Task<IActionResult> CriarFuncionario(FuncionarioDTO funcionario)
         {
             await _funcionarioService.CriarFuncionario(funcionario);
             return Ok();

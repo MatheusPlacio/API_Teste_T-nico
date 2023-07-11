@@ -21,12 +21,13 @@ namespace Domain.Models
         public string Bairro { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
-        public string Cidade { get; set; }
+        public string localidade { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public string UF { get; set; }
 
         // EF
-        public Funcionario Funcionarios { get; set; }
+        public Funcionario Funcionario { get; set; }
+        public int FuncionarioId { get; set; }
     }
 }

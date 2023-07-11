@@ -15,7 +15,7 @@ namespace Data.Mapping
             builder.Property(x => x.SobreNome).IsRequired().HasMaxLength(30);
             builder.Property(x => x.Idade).IsRequired().HasMaxLength(2);
 
-            builder.HasOne(x => x.Endereco).WithOne(x => x.Funcionarios).HasForeignKey<Funcionario>(x => x.EnderecoId);
+            builder.HasMany(x => x.Endereco).WithOne(x => x.Funcionario).HasForeignKey(x => x.FuncionarioId);
         }
     }
 }

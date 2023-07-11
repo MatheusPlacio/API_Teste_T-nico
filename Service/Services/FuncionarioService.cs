@@ -29,18 +29,7 @@ namespace Service.Services
                 FuncionarioId = funcionario.FuncionarioId,
                 Nome = funcionario.Nome,
                 SobreNome = funcionario.SobreNome,
-                Idade = funcionario.Idade,
-                Endereco = new Endereco
-                {
-                    EnderecoId = funcionario.Endereco.EnderecoId,
-                    Logradouro = funcionario.Endereco.Logradouro,
-                    Complemento = funcionario.Endereco.Complemento,
-                    Numero = funcionario.Endereco.Numero,
-                    Cep = funcionario.Endereco.Cep,
-                    Bairro = funcionario.Endereco.Bairro,
-                    Cidade = funcionario.Endereco.Cidade,
-                    UF = funcionario.Endereco.UF
-                }
+                Idade = funcionario.Idade
             };
 
             await _funcionarioRepository.Add(funcionarioDb);

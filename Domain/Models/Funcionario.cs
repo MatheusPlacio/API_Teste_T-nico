@@ -16,8 +16,6 @@ namespace Domain.Models
         public int Idade { get; set; }
 
         // EF
-        public Endereco Endereco { get; set; }
-        public int EnderecoId { get; set; }
-
+        public List<Endereco> Endereco { get; set; }
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20230608175932_NovasTabelas")]
-    partial class NovasTabelas
+    [Migration("20230709005246_First")]
+    partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -74,6 +74,9 @@ namespace Data.Migrations
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
+                    b.Property<int>("FuncionarioId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Logradouro")
                         .IsRequired()
                         .HasMaxLength(70)
@@ -90,6 +93,8 @@ namespace Data.Migrations
 
                     b.HasKey("EnderecoId");
 
+                    b.HasIndex("FuncionarioId");
+
                     b.ToTable("Enderecos");
                 });
 
@@ -100,9 +105,6 @@ namespace Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FuncionarioId"), 1L, 1);
-
-                    b.Property<int>("EnderecoId")
-                        .HasColumnType("int");
 
                     b.Property<int>("Idade")
                         .HasMaxLength(2)
@@ -119,9 +121,6 @@ namespace Data.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.HasKey("FuncionarioId");
-
-                    b.HasIndex("EnderecoId")
-                        .IsUnique();
 
                     b.ToTable("Funcionarios");
                 });
@@ -210,15 +209,15 @@ namespace Data.Migrations
                     b.ToTable("Pacientes");
                 });
 
-            modelBuilder.Entity("Domain.Models.Funcionario", b =>
+            modelBuilder.Entity("Domain.Models.Endereco", b =>
                 {
-                    b.HasOne("Domain.Models.Endereco", "Endereco")
-                        .WithOne("Funcionarios")
-                        .HasForeignKey("Domain.Models.Funcionario", "EnderecoId")
+                    b.HasOne("Domain.Models.Funcionario", "Funcionario")
+                        .WithMany("Endereco")
+                        .HasForeignKey("FuncionarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Endereco");
+                    b.Navigation("Funcionario");
                 });
 
             modelBuilder.Entity("Domain.Models.Paciente", b =>
@@ -237,10 +236,9 @@ namespace Data.Migrations
                     b.Navigation("Pacientes");
                 });
 
-            modelBuilder.Entity("Domain.Models.Endereco", b =>
+            modelBuilder.Entity("Domain.Models.Funcionario", b =>
                 {
-                    b.Navigation("Funcionarios")
-                        .IsRequired();
+                    b.Navigation("Endereco");
                 });
 #pragma warning restore 612, 618
         }

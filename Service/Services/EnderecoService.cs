@@ -2,6 +2,7 @@
 using Domain.Interfaces.IRepository;
 using Domain.Interfaces.IService;
 using Domain.Models;
+using Newtonsoft.Json;
 
 namespace Service.Services
 {
@@ -23,7 +24,7 @@ namespace Service.Services
                 Numero = endereco.Numero,
                 Cep = endereco.Cep,
                 Bairro = endereco.Bairro,
-                Cidade = endereco.Cidade,
+                localidade = endereco.localidade,
                 UF = endereco.UF
             };
 
@@ -37,21 +38,44 @@ namespace Service.Services
             return true;
         }
 
-        public async Task AdicionarEndereco(EnderecoDTO endereco)
+        public async Task AdicionarEndereco(EnderecoCepDTO cep)
         {
-            var enderecoDb = new Endereco
-            {
-                EnderecoId = endereco.EnderecoId,
-                Logradouro = endereco.Logradouro,
-                Complemento = endereco.Complemento,
-                Numero = endereco.Numero,
-                Cep = endereco.Cep,
-                Bairro = endereco.Bairro,
-                Cidade = endereco.Cidade,
-                UF = endereco.UF
-            };
+            var viaCepUrl = $"https://viacep.com.br/ws/{cep.Cep}/json/";
+            var httpClient = new HttpClient();
+            var response = await httpClient.GetAsync(viaCepUrl);
 
-            await _enderecoRepository.Add(enderecoDb);
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var viaCepResult = JsonConvert.DeserializeObject<EnderecoDTO>(content);
+
+                if (!string.IsNullOrEmpty(viaCepResult.Logradouro))
+                {
+                    var endereco = new Endereco
+                    {
+                        EnderecoId = viaCepResult.EnderecoId,
+                        Logradouro = viaCepResult.Logradouro,
+                        Complemento = viaCepResult.Complemento,
+                        Numero = cep.Numero,
+                        Cep = viaCepResult.Cep,
+                        Bairro = viaCepResult.Bairro,
+                        localidade = viaCepResult.localidade,
+                        UF = viaCepResult.UF,
+                        FuncionarioId = cep.FuncionarioId
+                    };
+
+                    // Salva o endereço no banco de dados
+                    await _enderecoRepository.Add(endereco);
+                }
+                else
+                {
+                    throw new Exception("Não foi possível obter os dados de endereço do CEP informado.");
+                }
+            }
+            else
+            {
+                throw new Exception("Erro ao consultar o serviço de CEP.");
+            }
         }
 
         public async Task<bool> DeletarEndereco(int id)
@@ -70,10 +94,10 @@ namespace Service.Services
             return result;
         }
 
-        public async Task<IList<Endereco>> ObterTodosEnderecos()
+        public async Task<IList<Endereco>> GetTodosEnderecos()
         {
-           var result = await _enderecoRepository.Get();
-            return result;
+           var result = await _enderecoRepository.GetTodosEnderecos();
+           return result;
         }
     }
 }

@@ -16,10 +16,8 @@ namespace Data.Mapping
             builder.Property(x => x.Bairro).IsRequired().HasMaxLength(50);
             builder.Property(x => x.Numero).IsRequired().HasMaxLength(50);
             builder.Property(x => x.Cep).IsRequired().HasMaxLength(9);
-            builder.Property(x => x.Cidade).IsRequired().HasMaxLength(70);
-            builder.Property(x => x.UF).IsRequired().HasMaxLength(2);
-
-            
+            builder.Property(x => x.localidade).IsRequired().HasMaxLength(70);
+            builder.Property(x => x.UF).IsRequired().HasMaxLength(2);          
         }
     }
 }

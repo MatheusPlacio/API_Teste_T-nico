@@ -16,13 +16,10 @@ namespace Domain.DTOs.FuncionarioDTO
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public int Idade { get; set; }
 
-        // EF
-        public EnderecoViewModel Endereco { get; set; }
     }
 
     public class EnderecoViewModel
     {
-        public int EnderecoId { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public string Logradouro { get; set; }

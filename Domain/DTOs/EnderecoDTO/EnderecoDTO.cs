@@ -21,9 +21,13 @@ namespace Domain.DTOs.EnderecoDTO
         public string Bairro { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
-        public string Cidade { get; set; }
+        public string localidade { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public string UF { get; set; }
+
+        public int FuncionarioId { get; set; }
+
+        public string FuncionarioNome { get; set; } 
     }
 }
